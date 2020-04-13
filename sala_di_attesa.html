@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Stazione di Tempio Pausania</title>
-    <meta name="description" content="Stazione di Tempio Pausania">
+    <title>Santa Maria della Strada</title>
+    <meta name="description" content="Santa Maria della Strada">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
    <!--animation component script-->
@@ -11,7 +11,55 @@
     <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
     
     <script>
+      AFRAME.registerComponent('infogroup',{
+        init:function(){
+            this.el.addEventListener('reloadinfo',function(evt){
+            //alert(evt.detail.currinfo+"   "+evt.detail.newinfo);
+            //get the entire current spot group and scale it to 0
+            var currinfogroup=document.getElementById(evt.detail.currinfo);
+            currinfogroup.setAttribute("scale","0 0 0");
             
+            //get the entire new spot group and scale it to 1
+            var newinfogroup=document.getElementById(evt.detail.newinfo);
+            newinfogroup.setAttribute("scale","3 3 3");
+          });
+        }
+      });
+      AFRAME.registerComponent('infoicon',{
+        schema:{
+          linkto:{type:"string",default:""},
+          infogroup:{type:"string",default:""}
+        },
+        init:function(){
+          
+          //add image source of hotspot icon
+          this.el.setAttribute("src","#info-icon");
+          //resize
+          this.el.setAttribute("scale","3 3 3");
+          //make the icon look at the camera all the time
+          this.el.setAttribute("look-at","#cam");
+          
+          var data=this.data;
+          
+          this.el.addEventListener('click',function(){
+            this.setAttribute("scale","40 20 1");
+            this.setAttribute("src",data.infolink);
+          });
+          this.el.addEventListener('mouseleave',function(){
+            this.setAttribute("scale","2 2 2");
+            this.setAttribute("src","#info-icon");
+            
+            var cur=document.getElementById("cursor-visual");
+            cur.emit("stopFuse");
+          });
+          this.el.addEventListener('mouseenter', function (evt) {
+            var cur=document.getElementById("cursor-visual");
+            cur.emit("startFuse");
+            
+          });
+        }
+      });
+      
       
       AFRAME.registerComponent('hotspots',{
         init:function(){
@@ -41,7 +89,11 @@
           //create event for spots component to change the spots data
           spotcomp.emit('reloadspots',{newspots:ndata.spotgroup,currspots:currspots});
 
-          
+
+          var infocomp=document.getElementById("infos");
+          var currinfo=ndata.infoparent;
+          //create event for spots component to change the spots data
+          infocomp.emit('reloadinfo',{currinfo:currinfo,newinfo:ndata.infogroup});  
           
           //var ncam=document.getElementById("cam");
           //this.setAttribute("camera","fov",80);
@@ -58,8 +110,10 @@
       AFRAME.registerComponent('spot',{
         schema:{
           linkto:{type:"string",default:""},
-          spotgroup:{type:"string",default:""}
-          },
+          spotgroup:{type:"string",default:""},
+          infogroup:{type:"string",default:""},
+          infoparent:{type:"string",default:""}
+        },
         init:function(){
           
           //add image source of hotspot icon
@@ -97,30 +151,70 @@
   <body>
     <a-scene background="color: #FAFAFA" inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
       <a-assets>
-        <img id="pos1" src="images/stazione_1.jpg">
-        <img id="pos2" src="images/stazione_2.jpg">
-        <img id="pos3" src="images/stazione_3.jpg">
-                
+        <img id="pos1" src="images/s_maria_1.jpg">
+        <img id="pos2" src="images/s_maria_2.jpg">
+        <img id="pos3" src="images/s_maria_3.jpg">
+        <img id="pos4" src="images/s_maria_4.jpg">
         
+        <img id="info1" src="pannelli/lunetta_sinistra.png">
+        <img id="info2" src="pannelli/lunetta_destra.png">
+        <img id="info3" src="pannelli/rosone.png">
+        <img id="info4" src="pannelli/angelo.png">
+        <img id="info5" src="pannelli/cavaliere.png">
+        <img id="info6" src="pannelli/ultimo_combattimento.png">
+        <img id="info7" src="pannelli/giona.png">
+        <img id="info8" src="pannelli/gerusalemme.png">
+        <img id="info9" src="pannelli/acquasantiera.png">
+        <img id="info10" src="pannelli/sarcofago.png">
+        <img id="info11" src="pannelli/frammento_ambone.png">
+        <img id="info12" src="pannelli/crocifisso.png">
+        <img id="info13" src="pannelli/statua.png">
         
         <img id="hotspot" src="icone/hotspot.png">
-       
+        <img id="info-icon" src="icone/info_button.png">
       </a-assets>
       <!-- pos teleport hotspots -->
       <a-entity id="spots" hotspots>
-          <a-entity id="group-pos1" scale="0 0 0">
-          <a-image spot="linkto:#pos2;spotgroup:group-pos2" position="0 0.34235 12.26596"></a-image>
-          <a-image spot="linkto:#pos3;spotgroup:group-pos3" position="0 1.00169 -10.09939"></a-image>
+        <a-entity id="group-pos1">
+          <a-image spot="linkto:#pos2;spotgroup:group-pos2;infogroup:infogroup-pos2;infoparent:infogroup-pos1" position="0 3.41972 -9.32426"></a-image>
         </a-entity>
         <a-entity id="group-pos2" scale="0 0 0">
-          <a-image spot="linkto:#pos1;spotgroup:group-pos1" position="0 1.04367 11.4515"></a-image>
+          <a-image spot="linkto:#pos1;spotgroup:group-pos1;infogroup:infogroup-pos1;infoparent:infogroup-pos2" position="0 0.34235 12.26596"></a-image>
+          <a-image spot="linkto:#pos3;spotgroup:group-pos3;infogroup:infogroup-pos3;infoparent:infogroup-pos2" position="0 1.00169 -10.09939"></a-image>
         </a-entity>
         <a-entity id="group-pos3" scale="0 0 0">
-          <a-image spot="linkto:#pos1;spotgroup:group-pos1" position="-0.39243 1.03381 11.61062"></a-image>
+          <a-image spot="linkto:#pos2;spotgroup:group-pos2;infogroup:infogroup-pos2;infoparent:infogroup-pos3" position="0 1.04367 11.4515"></a-image>
+          <a-image spot="linkto:#pos4;spotgroup:group-pos4;infogroup:infogroup-pos4;infoparent:infogroup-pos3" position="0 1.03381 -11.95179"></a-image>
+        </a-entity>
+        <a-entity id="group-pos4" scale="0 0 0">
+          <a-image spot="linkto:#pos3;spotgroup:group-pos3;infogroup:infogroup-pos3;infoparent:infogroup-pos4" position="-0.39243 1.03381 11.61062"></a-image>
         </a-entity>
       </a-entity>
       
-     
+      <!-- info spots -->
+      <a-entity id="infos" infogroup>
+        <a-entity id="infogroup-pos1">
+          <a-image infoicon="infolink:#info1" position="-18.91057 21.94539 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info2" position="16.85621 20.46793 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info3" position="0 43 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info4" position="10.61932 21.94539 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info5" position="-11.23347 27.97468 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info6" position="-11.25944 22.60602 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info7" position="8.08233 29 -27.67991"></a-image>
+          <a-image infoicon="infolink:#info8" position="0 28 -22.20359"></a-image>          
+        </a-entity>
+        <a-entity id="infogroup-pos2" scale="0 0 0">
+          <a-image infoicon="infolink:#info10" position="-27.10018 2.39252 1.35111"></a-image>
+           <a-image infoicon="infolink:#info11" position="-27.10018 10.39252 1.35111"></a-image>
+          <a-image infoicon="infolink:#info9" position="27.10018 -7.37422 29.4867"></a-image>
+        </a-entity>
+        <a-entity id="infogroup-pos3" scale="0 0 0">
+          <a-image infoicon="infolink:#info12" position="-27.10018 2.39252 1.35111"></a-image>         
+        </a-entity>
+        <a-entity id="infogroup-pos4" scale="0 0 0">
+          <a-image infoicon="infolink:#info13" position="1.21569 13.46 -22.20359"></a-image>
+        </a-entity>
+      </a-entity>
       
       <a-entity id="cam" camera="fov:80" position="0 1.6 0" look-controls
                 animation__zoomin="property:camera.fov;dur:2000;to:50;startEvents:zoomin;"
