@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Santa Maria della Strada</title>
-    <meta name="description" content="Santa Maria della Strada">
+    <title>Stazione di Tempio Pausania</title>
+    <meta name="description" content="Stazione di Tempio Pausania">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
    <!--animation component script-->
@@ -151,11 +151,10 @@
   <body>
     <a-scene background="color: #FAFAFA" inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
       <a-assets>
-        <img id="pos1" src="images/s_maria_1.jpg">
-        <img id="pos2" src="images/s_maria_2.jpg">
-        <img id="pos3" src="images/s_maria_3.jpg">
-        <img id="pos4" src="images/s_maria_4.jpg">
-        
+        <img id="pos1" src="images/stazione_1.jpg">
+        <img id="pos2" src="images/stazione_2.jpg">
+        <img id="pos3" src="images/stazione_3.jpg">
+                
         <img id="info1" src="pannelli/lunetta_sinistra.png">
         <img id="info2" src="pannelli/lunetta_destra.png">
         <img id="info3" src="pannelli/rosone.png">
@@ -177,17 +176,13 @@
       <a-entity id="spots" hotspots>
         <a-entity id="group-pos1">
           <a-image spot="linkto:#pos2;spotgroup:group-pos2;infogroup:infogroup-pos2;infoparent:infogroup-pos1" position="0 3.41972 -9.32426"></a-image>
+           <a-image spot="linkto:#pos3;spotgroup:group-po32;infogroup:infogroup-pos3;infoparent:infogroup-pos1" position="0 -3.41972 -9.32426"></a-image>
         </a-entity>
         <a-entity id="group-pos2" scale="0 0 0">
           <a-image spot="linkto:#pos1;spotgroup:group-pos1;infogroup:infogroup-pos1;infoparent:infogroup-pos2" position="0 0.34235 12.26596"></a-image>
-          <a-image spot="linkto:#pos3;spotgroup:group-pos3;infogroup:infogroup-pos3;infoparent:infogroup-pos2" position="0 1.00169 -10.09939"></a-image>
         </a-entity>
         <a-entity id="group-pos3" scale="0 0 0">
-          <a-image spot="linkto:#pos2;spotgroup:group-pos2;infogroup:infogroup-pos2;infoparent:infogroup-pos3" position="0 1.04367 11.4515"></a-image>
-          <a-image spot="linkto:#pos4;spotgroup:group-pos4;infogroup:infogroup-pos4;infoparent:infogroup-pos3" position="0 1.03381 -11.95179"></a-image>
-        </a-entity>
-        <a-entity id="group-pos4" scale="0 0 0">
-          <a-image spot="linkto:#pos3;spotgroup:group-pos3;infogroup:infogroup-pos3;infoparent:infogroup-pos4" position="-0.39243 1.03381 11.61062"></a-image>
+          <a-image spot="linkto:#pos1;spotgroup:group-pos1;infogroup:infogroup-pos1;infoparent:infogroup-pos3" position="0 1.04367 11.4515"></a-image>
         </a-entity>
       </a-entity>
       
