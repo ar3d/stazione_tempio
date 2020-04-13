@@ -58,10 +58,8 @@
       AFRAME.registerComponent('spot',{
         schema:{
           linkto:{type:"string",default:""},
-          spotgroup:{type:"string",default:""},
-          infogroup:{type:"string",default:""},
-          infoparent:{type:"string",default:""}
-        },
+          spotgroup:{type:"string",default:""}
+          },
         init:function(){
           
           //add image source of hotspot icon
@@ -111,7 +109,7 @@
       <!-- pos teleport hotspots -->
       <a-entity id="spots" hotspots>
           <a-entity id="group-pos1" scale="0 0 0">
-          <a-image spot="linkto:#pos2;spotgroup:group-pos1" position="0 0.34235 12.26596"></a-image>
+          <a-image spot="linkto:#pos2;spotgroup:group-pos2" position="0 0.34235 12.26596"></a-image>
           <a-image spot="linkto:#pos3;spotgroup:group-pos3" position="0 1.00169 -10.09939"></a-image>
         </a-entity>
         <a-entity id="group-pos2" scale="0 0 0">
