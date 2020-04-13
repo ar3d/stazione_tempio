@@ -160,8 +160,8 @@
       <!-- pos teleport hotspots -->
       <a-entity id="spots" hotspots>
         <a-entity id="group-pos1">
-          <a-image spot="linkto:#pos2;spotgroup:group-pos2;infogroup:infogroup-pos2;infoparent:infogroup-pos1" position="0 3.41972 -9.32426"></a-image>
-           <a-image spot="linkto:#pos3;spotgroup:group-pos2;infogroup:infogroup-pos3;infoparent:infogroup-pos1" position="0 -3.41972 -9.32426"></a-image>
+          <a-image spot="linkto:#pos2;spotgroup:group-pos2;infogroup:infogroup-pos2;infoparent:infogroup-pos1" position="7.99937 0.74975 -1.88659"></a-image>
+           <a-image spot="linkto:#pos3;spotgroup:group-pos2;infogroup:infogroup-pos3;infoparent:infogroup-pos1" position="-7.99937 0.74975 -1.88659"></a-image>
         </a-entity>
         <a-entity id="group-pos2" scale="0 0 0">
           <a-image spot="linkto:#pos1;spotgroup:group-pos1;infogroup:infogroup-pos1;infoparent:infogroup-pos2" position="0 0.34235 12.26596"></a-image>
@@ -190,7 +190,7 @@
                  animation__fadein="property:material.opacity;to:1;dur:2000;startEvents:camFadeIn"
                  animation__fadeout="property:material.opacity;to:0;dur:200;startEvents:camFadeOut"></a-plane>
       </a-entity>
-      <a-sky id="skybox" src="#pos1" rotation="0 180 0"></a-sky>
+      <a-sky id="skybox" src="#pos1" rotation="0 185 0"></a-sky>
     </a-scene>
     <script>
       var ccam=document.getElementById("cam");
